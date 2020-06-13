@@ -9,8 +9,18 @@
 #   }
 # }
 
-terraform {
-  backend "local" {
-    path = "ansible_run_terraform.tfstate"
+# terraform {
+#   backend "local" {
+#     path = "ansible_run_terraform.tfstate"
+#   }
+# }
+
+data "terraform_remote_state" "vpc" {
+  backend = "remote"
+  config = {
+    organization = "mb_mokgosi"
+    workspaces = {
+      name = "terraform"
+    }
   }
 }
